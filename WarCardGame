@@ -1,11 +1,18 @@
 import random
 
+#                                          -------- GLOBAL VARIABLES ---------
+
 suits = ("Hearts", "Diamonds", "Spades", "Clubs")
 ranks = ("Two","Three","Four","Five","Six","Seven","Eight",
          "Nine","Ten","Jack","Queen","King","Ace")
 values = {"Two":2,"Three":3,"Four":4,"Five":5,"Six":6,"Seven":7,"Eight":8,
          "Nine":9,"Ten":10,"Jack":11,"Queen":12,"King":13,"Ace":14}
 
+
+#                                           ------- CREATING CLASSES ----------
+
+
+# CARD CLASS --------- 
 
 class Card():
     def __init__(self,suit,rank):
@@ -16,6 +23,12 @@ class Card():
     def __str__(self):
         return self.rank + " of " + self.suit
 
+# CALLING CLASS
+# two_of_diamond = Card("Diamonds","Two")
+# print(two_of_diamond)
+
+
+# DECK CLASS --------
 
 class Deck():
     def __init__(self):
@@ -32,6 +45,11 @@ class Deck():
     def deal_one(self):
         return self.all_cards.pop()
 
+# new_deck = Deck()
+# surp_card = new_deck.all_cards[0]
+
+
+# PLAYER CLASS --------
 
 class Player():
     def __init__(self,name):
@@ -53,14 +71,19 @@ class Player():
         return f"Player {self.name} has {len(self.all_cards)} cards."
 
 
+# identity = Player("Yash")
 
+
+#                                         --------- GAME LOGIC -----------
+
+# GAME SETUP ----------
 player_one = Player("One")
 player_two = Player("Two")
 
 new_deck = Deck()
 new_deck.shuffle()
 
-
+# adding 26 cards in player_one and player_two at once
 for x in range(26):
     player_one.add_cards(new_deck.deal_one())
     player_two.add_cards(new_deck.deal_one())
@@ -82,7 +105,7 @@ while game_on:
         game_on = False
         break
 
-    
+    # start a new round
     player_one_cards = []
     player_one_cards.append(player_one.remove_one())
 
@@ -90,7 +113,8 @@ while game_on:
     player_two_cards.append(player_two.remove_one())
 
 
-    
+    # NESTED WHILE LOOP ----
+
     at_war = True 
 
     while at_war:
